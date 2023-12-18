@@ -1,0 +1,37 @@
+For deploying using Docker Compose
+
+Change the current working directory to the project directory
+"docker-compose up --build"
+
+Run the Flask application. Paste whatever code you wish in the text area. Click on "Save Code" to save that code in the MySQL DB.
+Check the MySQL DB:
+    "docker ps -a" and get the MySQL container ID,
+    "docker exec -it <mysql-cont-id> bash",
+    "mysql",
+    "mysql -h db -u root -p" and use the "root" - default - password to connect to the MySQL server,
+    "use projectdb;",
+    "select * from entries;"
+
+---------------------------------------------------------------------------------------------------------------------------------------
+For deploying using Docker Compose
+
+Change the current working directory to the project directory
+"docker build -t code-app:v1.0 -f ./Dockerfile ."
+
+"kubectl apply -f deployment.yaml"
+"kubectl get all"
+
+Run the Flask application. Paste whatever code you wish in the text area. Click on "Save Code" to save that code in the MySQL DB.
+Check the MySQL DB:
+    "kubectl port-forward combined-app-deployment-577cf76498-kclts 5000:5000"
+
+ERROR:
+'''
+Internal Server Error
+The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+
+///
+
+2023-12-18 12:48:34 MySQLdb.OperationalError: (2002, "Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)")
+2023-12-18 12:48:34 127.0.0.1 - - [18/Dec/2023 10:48:34] "POST /save_code HTTP/1.1" 500 -
+'''
